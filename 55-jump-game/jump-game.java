@@ -26,8 +26,8 @@ class Solution {
                     }
                 }
                 if(flag==0)jumps=nums[i];
-                if(flag==2) break;
-                if(jumps==0)break;
+               
+                if(jumps==0 || flag==2)break;
             }
         }
         if(jumps==0)return false;
