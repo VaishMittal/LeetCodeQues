@@ -1,36 +1,63 @@
 class Solution {
     public int canCompleteCircuit(int[] gas, int[] cost) {
-        int n = gas.length;
-        int start = 0;
-        int travelled = 0;
-        int leftgas = 0;
-        int i = 0;
-        int totalGas = 0, totalCost = 0;
-
-        // quick check: if total gas < total cost → impossible
-        for (int k = 0; k < n; k++) {
-            totalGas += gas[k];
-            totalCost += cost[k];
+        int sumCost=0, sumGas=0,currInd=0,n=gas.length;
+        for(int i=0; i<n; i++){
+            sumGas+=gas[i];
+            sumCost+=cost[i];
         }
-        if (totalGas < totalCost) return -1;
-
-        while (start < n && travelled < n) {
-            if (gas[i] + leftgas >= cost[i]) {
-                leftgas = leftgas + gas[i] - cost[i];
-                travelled++;
-                i = (i + 1) % n;
-            } else {
-                // failed → move start forward
-                start = i + 1;
-                i = start;
-                travelled = 0;
-                leftgas = 0;
+        if(sumGas>=sumCost){
+            int sum=0;
+            for(int i=0; i<n; i++){
+                sum=sum + gas[i]-cost[i];
+                if(sum<0){
+                    currInd=i+1;
+                    sum=0;
+                }
             }
         }
+        else{
+            return -1;
+        }
 
-        return (travelled == n) ? start : -1;
+        return currInd;
+            
     }
 }
+
+
+// class Solution {
+//     public int canCompleteCircuit(int[] gas, int[] cost) {
+//         int n = gas.length;
+//         int start = 0;
+//         int travelled = 0;
+//         int leftgas = 0;
+//         int i = 0;
+//         int totalGas = 0, totalCost = 0;
+
+//         // quick check: if total gas < total cost → impossible
+//         for (int k = 0; k < n; k++) {
+//             totalGas += gas[k];
+//             totalCost += cost[k];
+//         }
+//         if (totalGas < totalCost) return -1;
+
+//         while (start < n && travelled < n) {
+//             if (gas[i] + leftgas >= cost[i]) {
+//                 leftgas = leftgas + gas[i] - cost[i];
+//                 travelled++;
+//                 i = (i + 1) % n;
+//             } else {
+//                 // failed → move start forward
+//                 start = i + 1;
+//                 i = start;
+//                 travelled = 0;
+//                 leftgas = 0;
+//             }
+//         }
+
+//         return (travelled == n) ? start : -1;
+//     }
+// }
 
 
 // class Solution {
