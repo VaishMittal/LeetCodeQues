@@ -3,9 +3,9 @@ class Solution {
         int n=s.length();
         if(n<=rows)return s;
         if(rows==1)return s;
-        String ans="";
+        StringBuilder ans= new StringBuilder("");
         for(int i=0;i<rows;i++){
-            ans+=s.charAt(i);
+            ans.append(s.charAt(i));
             int idx=i;
             int add=(rows-i)*2-2;
             int var=i*2;
@@ -13,16 +13,16 @@ class Solution {
             while(idx<n){
                 idx+=add;
                 if(idx>=n)break;
-                ans+=s.charAt(idx);
+              ans.append(s.charAt(idx));
                 
                 if(i!=0 && i!=rows-1){
                     idx+=var;
                     if(idx>=n)break;
-                    ans+=s.charAt(idx);
+                    ans.append(s.charAt(idx));
                 }
             }
 
         }
-        return ans;
+        return ans.toString();
     }
 }
