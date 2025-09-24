@@ -29,16 +29,14 @@ class Solution {
 
     public static String addSpace(String ans, int left, int word, int last) {
         if (last == 1 || word == 1) {
-            // Left-justify: just add spaces to the end
             while (left > 0) {
                 ans += " ";
                 left--;
             }
         } else {
-            // Full-justify: distribute spaces evenly
             String[] arr = ans.split(" ");
             int gaps = word - 1;
-            int totalSpaces = left + gaps; // spaces already present + left to add
+            int totalSpaces = left + gaps; 
             int minSpace = totalSpaces / gaps;
             int extra = totalSpaces % gaps;
             StringBuilder sb = new StringBuilder();
