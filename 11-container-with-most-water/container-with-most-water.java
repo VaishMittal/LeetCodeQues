@@ -12,9 +12,13 @@ class Solution {
             int mini=Math.min(arr[start],arr[end]);
             ans=Math.max(ans,mini*(end-start));
             if(arr[start]>=arr[end]){
+                int val=arr[end];
                 end--;
+                while(val>=arr[end] && end>start) end--;
             }else{
+                int val =arr[start];
                 start++;
+                while(val>=arr[start] && start<end)start++;
             }
         }
         return ans;
