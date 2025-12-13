@@ -3,20 +3,20 @@ class Solution {
         int n = text1.length();
         int m = text2.length();
         int[][] dp = new int[n+1][m+1];
-        for(int[] row : dp)Arrays.fill(row,-1);
-        return find(text1,text2,n,m,0,0,dp);
-    }
-    public int find(String a, String b,int n , int m , int i, int j,int[][] dp){
-        if(i>=n || j>=m)return 0;
-        int ans =0;
-        if(dp[i][j]!=-1)return dp[i][j];
-        if(a.charAt(i)==b.charAt(j)){
-           ans= 1 + find(a,b,n,m,i+1,j+1,dp);
-        }else{
-            ans= Math.max(find(a,b,n,m,i+1,j,dp),find(a,b,n,m,i,j+1,dp));
+        for(int i=1;i<=n;i++){
+            for(int j=1;j<=m;j++){
+                int ans=0;
+                if(text1.charAt(i-1)==text2.charAt(j-1)){
+                    ans = 1 + dp[i-1][j-1];
+                }else{
+                    ans = Math.max(dp[i][j-1],dp[i-1][j]);
+                }
+                dp[i][j]=ans;
+            }
         }
-        return dp[i][j] = ans;
+        return dp[n][m];
     }
+
 }
 
 
