@@ -1,3 +1,33 @@
+class Solution {
+    public boolean canJump(int[] nums) {
+        int n = nums.length;
+        boolean[] dp = new boolean[n];
+        dp[n-1]=true;
+        for(int i=n-2;i>=0;i--){
+            int end=i+nums[i];
+            if(end>=n)end=n-1;
+            for(int j=i+1;j<=end;j++){
+                dp[i] = dp[i] || dp[j];
+                if(dp[i]==true)break;
+            }
+        }
+        return dp[0];
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // class Solution {
 //     public boolean canJump(int[] nums) {
 
@@ -38,16 +68,16 @@
 // }
 
 
-class Solution {
-    public boolean canJump(int[] nums) {
-        int n =nums.length;
-        int power=0;
-        for(int i=0;i<n;i++){
-            if(power>=i){
-                power=Math.max(power,i+nums[i]);
-            }
-        }
-        if(power>=n-1)return true;
-        else return false;
-    }
-}
+// class Solution {
+//     public boolean canJump(int[] nums) {
+//         int n =nums.length;
+//         int power=0;
+//         for(int i=0;i<n;i++){
+//             if(power>=i){
+//                 power=Math.max(power,i+nums[i]);
+//             }
+//         }
+//         if(power>=n-1)return true;
+//         else return false;
+//     }
+// }
