@@ -12,18 +12,16 @@ class Pair{
 class Solution {
     public int shortestPathBinaryMatrix(int[][] grid) {
         int n = grid.length;
-        if(grid[0][0]==1)return -1;
+        if(grid[0][0]==1 || grid[n-1][n-1]==1)return -1;
         PriorityQueue<Pair> pq = new PriorityQueue<>((a,b)->(a.steps-b.steps));
         pq.add(new Pair(1,0,0));
-        int minsteps=Integer.MAX_VALUE;
+        grid[0][0]=1;
         while(!pq.isEmpty()){
             Pair p =pq.poll();
             int row=p.row;
             int col=p.col;
             int steps=p.steps;
-            if(row==n-1 && col==n-1){
-                minsteps=Math.min(minsteps,steps);
-            }
+            if(row==n-1 && col==n-1)return steps;
 
             int[] dr = {-1,-1,-1,1,1,1,0,0};
             int[] dc = {-1,0,1,-1,0,1,1,-1};
@@ -36,7 +34,7 @@ class Solution {
                 }
             }
         }
-        if(minsteps==Integer.MAX_VALUE)return -1;
-        else return minsteps;
+        return -1;
+       
     }
 }
