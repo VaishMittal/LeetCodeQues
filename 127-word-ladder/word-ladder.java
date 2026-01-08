@@ -11,26 +11,24 @@ class Solution {
     public int ladderLength(String beginWord, String endWord, List<String> wordList) {
         Queue<Pair> q = new LinkedList<>();
         Set<String> set = new HashSet<>();
-        int n = wordList.size();
-        for(int i=0;i<n;i++){
-            set.add(wordList.get(i));
+        for(String word : wordList){
+            set.add(word);
         }
         q.add(new Pair(beginWord,1));
-        set.remove(beginWord);
 
         while(!q.isEmpty()){
             Pair p = q.poll();
             String word=p.word;
-            int steps=p.steps;
-            if(word.equals(endWord))return steps;
+            int step=p.steps;
+            if(word.equals(endWord))return step;
             for(int i=0;i<word.length();i++){
-                for(char ch='a';ch<='z';ch++){
-                    char[] wordar = word.toCharArray();
+                for(char ch = 'a';ch <= 'z' ;ch++){
+                    char[] wordar= word.toCharArray();
                     wordar[i]=ch;
-                    String replaceWord= new String(wordar);
-                    if(set.contains(replaceWord)){
-                        set.remove(replaceWord);
-                        q.add(new Pair(replaceWord,steps+1));
+                    String newword=new String(wordar);
+                    if(set.contains(newword)){
+                        set.remove(newword);
+                        q.add(new Pair(newword,step+1));
                     }
                 }
             }
